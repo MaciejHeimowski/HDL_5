@@ -26,13 +26,9 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
     reg [4:0] counter;
 
     reg [7:0] digit;
+    wire [6:0] digit_sft = digit >> 1;
 
     reg prev_ps2_clk, curr_ps2_clk;
-
-    // initial begin
-    //     $dumpfile("ps2_tb.vcd");
-    //     $dumpvars(0, prev_ps2_clk, curr_ps2_clk, digit, digit_o);
-    // end
 
     always @(posedge clk_i, posedge rst_i) begin
         if(rst_i) begin
@@ -58,11 +54,11 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
                 else begin
                     counter <= counter + 1;
 
-                    if(counter == 1) begin
+                    if(counter == 0) begin
                         digit <= 0;
                     end
                     else if(counter >= 1 && counter <= 8) begin
-                        digit <= (digit << 1) | ps2_data_i;
+                        digit <= {ps2_data_i, digit_sft};
                     end
                 end
             end

@@ -57,58 +57,34 @@ module top(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i,
                 a100 <= a10;
                 a10 <= a1;
                 a1 <= digit_o;
+
+                dig1000 <= a100;
+                dig100 <= a10;
+                dig10 <= a1;
+                dig1 <= digit_o;
             end
             else if(digit_o < 10 && stage == 2'b01) begin
                 b1000 <= b100;
-                b100 <= a10;
-                a10 <= b1;
+                b100 <= b10;
+                b10 <= b1;
                 b1 <= digit_o;
+
+                dig1000 <= b100;
+                dig100 <= b10;
+                dig10 <= b1;
+                dig1 <= digit_o;
             end
             else if(digit_o == 10 && stage == 2'b00) begin
                 stage <= 2'b01;
-                add_sub <= 1;
+                add_sub <= 0;
             end
             else if(digit_o == 11) begin
                 stage <= 2'b01;
-                add_sub <= 0;
+                add_sub <= 1;
             end
             else if(digit_o == 12) begin
                 stage <= 2'b10;
-            end
-            else if(digit_o == 13) begin
-                a1 <= 0;
-                a10 <= 0;
-                a100 <= 0;
-                a1000 <= 0;
 
-                b1 <= 0;
-                b10 <= 0;
-                b100 <= 0;
-                b1000 <= 0;
-
-                stage <= 0;
-            end
-            else begin
-
-            end
-        end
-    end
-
-    always @* begin
-        case(stage)
-            2'b00: begin
-                dig1 <= a1;
-                dig10 <= a10;
-                dig100 <= a100;
-                dig1000 <= a1000;
-            end
-            2'b01: begin
-                dig1 <= b1;
-                dig10 <= b10;
-                dig100 <= b100;
-                dig1000 <= b1000;
-            end
-            2'b10: begin
                 if(add_sub) begin
                     dig1 <= sum1;
                     dig10 <= sum10;
@@ -122,13 +98,27 @@ module top(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i,
                     dig1000 <= diff1000;
                 end
             end
-            default: begin
+            else if(digit_o == 13) begin
+                a1 <= 0;
+                a10 <= 0;
+                a100 <= 0;
+                a1000 <= 0;
+
+                b1 <= 0;
+                b10 <= 0;
+                b100 <= 0;
+                b1000 <= 0;
+
+                stage <= 0;
+
                 dig1 <= 0;
                 dig10 <= 0;
                 dig100 <= 0;
                 dig1000 <= 0;
             end
-        endcase
-    end
+            else begin
 
+            end
+        end
+    end
 endmodule
