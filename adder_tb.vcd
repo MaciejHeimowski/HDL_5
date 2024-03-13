@@ -1,5 +1,5 @@
 $date
-	Wed Mar 13 10:02:32 2024
+	Wed Mar 13 11:13:19 2024
 $end
 $version
 	Icarus Verilog
@@ -14,13 +14,13 @@ $scope module adder_tb $end
 $var reg 4 " b_i [3:0] $end
 $upscope $end
 $scope module adder_tb $end
-$var reg 1 # borrow_i $end
+$var reg 1 # carry_i $end
 $upscope $end
 $scope module adder_tb $end
 $var wire 4 $ sum_o [3:0] $end
 $upscope $end
 $scope module adder_tb $end
-$var wire 1 % borrow_o $end
+$var wire 1 % carry_o $end
 $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
