@@ -18,6 +18,7 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
             8'h7b: ps2_conv = 4'd10;
             8'h79: ps2_conv = 4'd11;
             8'h55: ps2_conv = 4'd12;
+            8'h76: ps2_conv = 4'd13;
             default: ps2_conv = 4'd0;
         endcase
     endfunction
@@ -28,10 +29,10 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
 
     reg prev_ps2_clk, curr_ps2_clk;
 
-    initial begin
-        $dumpfile("ps2_tb.vcd");
-        $dumpvars(0, prev_ps2_clk, curr_ps2_clk, digit, digit_o);
-    end
+    // initial begin
+    //     $dumpfile("ps2_tb.vcd");
+    //     $dumpvars(0, prev_ps2_clk, curr_ps2_clk, digit, digit_o);
+    // end
 
     always @(posedge clk_i, posedge rst_i) begin
         if(rst_i) begin
