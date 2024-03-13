@@ -1,6 +1,6 @@
 `timescale 1ns / 1ns
 
-module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output reg [3:0] digit_o);
+module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output reg [3:0] digit_o, output reg new_data_o);
     function [3:0] ps2_conv;
         input [7:0] code_i;
 
@@ -15,8 +15,9 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
             8'h3d: ps2_conv = 4'd7;
             8'h3e: ps2_conv = 4'd8;
             8'h46: ps2_conv = 4'd9;
-            8'h4e: ps2_conv = 4'd10;
-            8'h55: ps2_conv = 4'd11;
+            8'h7b: ps2_conv = 4'd10;
+            8'h79: ps2_conv = 4'd11;
+            8'h55: ps2_conv = 4'd12;
             default: ps2_conv = 4'd0;
         endcase
     endfunction
@@ -39,15 +40,19 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
             digit_o <= 0;
             prev_ps2_clk <= 0;
             curr_ps2_clk <= 0;
+            new_data_o <= 0;
         end
         else if(clk_i) begin
             prev_ps2_clk <= curr_ps2_clk;
             curr_ps2_clk <= ps2_clk_i;
 
+            new_data_o <= 0;
+
             if(prev_ps2_clk == 1 && curr_ps2_clk == 0) begin
                 if(counter >= 10) begin
                     counter <= 0;
                     digit_o <= ps2_conv(digit);
+                    new_data_o <= 1;
                 end
                 else begin
                     counter <= counter + 1;

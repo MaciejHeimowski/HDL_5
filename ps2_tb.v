@@ -5,11 +5,13 @@ module ps2_tb;
     reg clk_i, rst_i, ps2_clk_i, ps2_data_i;
     wire [3:0] digit_o;
 
-    ps2 uut(clk_i, rst_i, ps2_clk_i, ps2_data_i, digit_o);
+    wire new_data_o;
+
+    ps2 uut(clk_i, rst_i, ps2_clk_i, ps2_data_i, digit_o, new_data_o);
 
     initial begin
         $dumpfile("ps2_tb.vcd");
-        $dumpvars(0, clk_i, rst_i, ps2_clk_i, ps2_data_i, digit_o);
+        $dumpvars(0, clk_i, rst_i, ps2_clk_i, ps2_data_i, digit_o, new_data_o);
 
         clk_i = 0;
         rst_i = 0;
