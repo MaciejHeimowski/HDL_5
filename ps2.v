@@ -15,6 +15,8 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
             8'h3d: ps2_conv = 4'd7;
             8'h3e: ps2_conv = 4'd8;
             8'h46: ps2_conv = 4'd9;
+            8'h4e: ps2_conv = 4'd10;
+            8'h55: ps2_conv = 4'd11;
             default: ps2_conv = 4'd0;
         endcase
     endfunction
@@ -31,10 +33,10 @@ module ps2(input clk_i, input rst_i, input ps2_clk_i, input ps2_data_i, output r
     end
 
     always @(posedge clk_i, posedge rst_i) begin
-
         if(rst_i) begin
             counter <= 0;
             digit <= 0;
+            digit_o <= 0;
             prev_ps2_clk <= 0;
             curr_ps2_clk <= 0;
         end

@@ -13,7 +13,7 @@ module ps2_tb;
 
         clk_i = 0;
         rst_i = 0;
-        ps2_clk_i = 0;
+        ps2_clk_i = 1;
         ps2_data_i = 0;
 
         #1  rst_i = 1;
@@ -62,6 +62,54 @@ module ps2_tb;
         #5  ps2_clk_i = 1;
             ps2_data_i = 1;
         #5  ps2_clk_i = 0;
+
+        #500
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 0;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 0;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 1;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 0;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 1;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 0;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 1;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 0;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 1;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 0;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
+            ps2_data_i = 1;
+        #5  ps2_clk_i = 0;
+
+        #5  ps2_clk_i = 1;
 
         #200 $finish;
     end
